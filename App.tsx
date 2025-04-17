@@ -1,7 +1,7 @@
 import { Text, SafeAreaView, StyleSheet,Image, TextInput,Pressable, View} from 'react-native'
 import {useState} from 'react'
-import User from './component/User'
-import ResetPassword from './component/ResetPassword'
+import User from './components/User'
+import ResetPassword from './components/ResetPassword'
 
 export default function App() {
   const [email, setEmail] = useState("")
@@ -16,7 +16,7 @@ export default function App() {
       setEmail("")
       setPassword("")
     }else if(email === "user@gmail.com" && password === "12345"){
-      alert("Welcome Jovêncio")
+      alert("Welcome Julia Barros")
       setUser(true)
       setLogged(true)
       setEmail("")
@@ -57,7 +57,7 @@ export default function App() {
           <Pressable style={styles.forgottenPassword}>Esqueci minha senha</Pressable>
           <Pressable style={styles.login} onPress={handleLogin} ><Text style={styles.textLogin} >Entrar</Text></Pressable>
           <Text style={styles.footer}>Não tem uma conta?<Pressable style={styles.register}>Cadastre-se</Pressable></Text>
-          <Text style={styles.creator}>Criado por Jovêncio Sigma da Bahia</Text>
+          <Text style={styles.creator}>Criado por Julia Barros</Text>
         </View>
       ): user ? (
           <User onLogout={handleLogout}  />
