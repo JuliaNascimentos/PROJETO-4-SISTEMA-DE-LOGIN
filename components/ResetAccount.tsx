@@ -1,22 +1,25 @@
 import { useState } from 'react'
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native'
 
-export default function ResetPassword({ handleLogout , changePassword}) {
-  const [newPassword, setNewPassword] = useState('');
+export default function ResetAccount({ handleLogout, changeDates }) {
+  const [newPassword, setNewPassword] = useState('')
+  const [newEmail, setNewEmail] = useState('')
+  const [newName, setNewName] = useState('')
+  const [newBirthday, setNewBirthday] = useState('')
 
-  const handleResetPassword = () => {
-    if (newPassword) {
-      changePassword(newPassword);
-      alert('Senha redefinida com sucesso!');
-      handleLogout();
-    } else {
-      alert('Por favor, digite a nova senha.');
-    }
-  };
+  const handleSaveChanges = () => {
+    if (!newName || !newPassword || !newBirthday || !newEmail) {
+      alert('Por favor, preencha todos os campos.')
+    }else{
+      changeDates(newName, newPassword, newBirthday, newEmail)
+      handleLogout()
+      alert('Dados atualizados!')
+    }   
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Redefinir Senha</Text>
+      <Text style={styles.title}>Redefinir Dados de Usuário</Text>
 
       <Text style={styles.label}>Nova Senha</Text>
       <TextInput
@@ -26,8 +29,30 @@ export default function ResetPassword({ handleLogout , changePassword}) {
         value={newPassword}
         onChangeText={setNewPassword}
       />
-      <Pressable style={styles.button} onPress={handleResetPassword}>
-        <Text style={styles.buttonText}>Redefinir Senha</Text>
+      <Text style={styles.label}>Novo Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o novo Email"
+        value={newEmail}
+        onChangeText={setNewEmail}
+      />
+      <Text style={styles.label}>Nova Data de Aniversário</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nova Data de Aniversário"
+        value={newBirthday}
+        onChangeText={setNewBirthday}
+      />
+      <Text style={styles.label}>Novo Nome</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o novo Nome"
+        value={newName}
+        onChangeText={setNewName}
+      />
+
+      <Pressable style={styles.button} onPress={handleSaveChanges}>
+        <Text style={styles.buttonText}>Salvar Alterações</Text>
       </Pressable>
       <Pressable style={styles.buttonSecondary} onPress={handleLogout}>
         <Text style={styles.buttonSecondaryText}>Voltar</Text>
@@ -40,20 +65,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 20,
+    padding: 15,
     backgroundColor: '#f5f5f5',
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 15,
     textAlign: 'center',
     color: '#333',
   },
   label: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 5,
     color: '#555',
   },
